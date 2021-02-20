@@ -35,10 +35,7 @@ function readFile(sample) {
             });
             
     
-        //var samplevalues = samplesArray.sample_values;
-        //var sortedsamples = results.sort((a,b) =>
-        //b.sample - a.sample);
-    
+   
         //sliced to find top 10
     
         var topsamples = results.sample_values.slice(0,10).reverse();
