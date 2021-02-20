@@ -50,4 +50,60 @@ function readFile(sample) {
         var otulabels = results.otu_labels;
         var otu_labels = otulabels.slice(0, 10).reverse()
     
-        
+        //created horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
+    
+        var trace1 = {
+            x: topsamples,
+            y: otu_labels,
+            type: 'bar',
+            orientation: 'h'
+        };
+
+        var data = [trace1];
+
+        var layout = {
+            title: 'Top Ten OTUs in Sample',
+            xaxis: {title: 'Sample Value'},
+            yaxis: {title: 'OTU ID'},
+        };
+
+        Plotly.newPlot('bar', data, layout)
+
+
+        //created bubble chart that displays each sample
+        //created variables for the bubble
+        var otu_ids = results.otu_ids
+        var sample_values = results.samples_values
+
+        var trace2 = {
+            x: sample_values,
+            y: otu_ids,
+            text: otulabels,
+            mode: 'markers',
+            marker:{
+                size: sample_values,
+                color: otu_ids
+            }
+        };
+
+        var data2 = [trace2];
+
+        // bubble chart layout
+        var layout2 = {
+            title: 'All OTUs in Sample',
+            xaxis: {title: 'OTU ID'},
+            yaxis: {title: 'Number of Samples Found'}
+
+        }
+
+        Plotly.newPlot('bubble', data2, layout2);
+
+
+})
+};
+
+//changes data with each selection
+function optionChanged(newsample){readFile(newsample)};
+
+
+readFile();
